@@ -1,0 +1,41 @@
+query getAllToDoList {
+  ToDo_List {
+    created_at
+    status
+    id
+    name
+    body
+    updated_at
+  }
+}
+
+mutation deletebyId($id: uuid!) {
+  delete_ToDo_List_by_pk(id: $id) {
+    id
+  }
+}
+
+mutation insertbyName($name: String!, $body: String!) {
+  insert_ToDo_List_one(object: { name: $name, body: $body }) {
+    name
+    id
+    body
+  }
+}
+
+mutation updateNamebyId($id: uuid!, $name: String!, $body: String!) {
+  update_ToDo_List_by_pk(
+    pk_columns: { id: $id }
+    _set: { name: $name, body: $body }
+  ) {
+    id
+    name
+  }
+}
+
+mutation updateStatusbyId($id: uuid!, $status: Boolean!) {
+  update_ToDo_List_by_pk(pk_columns: { id: $id }, _set: { status: $status }) {
+    id
+    name
+  }
+}
